@@ -2,6 +2,7 @@
 #Date: 2020-04-20
 #Author: Daniel Kuhman
 #Contact: danielkuhman@gmail.com
+#GitHub: https://github.com/dkuhman
 
 library("tidyverse")
 library("ggplot2")
