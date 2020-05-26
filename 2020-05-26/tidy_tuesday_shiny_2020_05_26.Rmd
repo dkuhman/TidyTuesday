@@ -1,0 +1,27 @@
+---
+title: "Cocktail Guide"
+author: "Daniel Kuhman"
+date: "May 26, 2020"
+output: html_document
+runtime: shiny
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(shiny)
+```
+
+Throwing a party and looking for a lineup of drinks? Look no further - this is your ultimate guide for making cocktails! 
+
+## Choose your Alcohol
+
+```{r, echo=FALSE, warning=FALSE}
+inputPanel(
+  selectInput("n_breaks", label = "Alcohol:",
+              choices = c('Vodka', 'Whiskey', 'Tequila', 'Rum', 'Gin'),
+              selected = 'Vodka')
+)
+```
+
+
+
