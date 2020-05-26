@@ -45,3 +45,14 @@ TidyTuesday is hosted by the "R for Data Science online learning community" (htt
 
 **What I learned:** This was my first time using ggpubr to add multiple plots to a single figure. The ggarange function is relatively easy to use, but some aspects of it are not intuitive. 
 
+---
+## May 26, 2020
+**Description:** 
+
+**What I did:**  
+
+**Libraries used:** tidyverse, shiny
+
+**Final output:**
+
+**What I learned:** 
