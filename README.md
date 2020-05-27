@@ -47,12 +47,14 @@ TidyTuesday is hosted by the "R for Data Science online learning community" (htt
 
 ---
 ## May 26, 2020
-**Description:** 
+**Description:** This dataset included a long list of cocktails and their ingredients.
 
-**What I did:**  
+**What I did:** I created a simple Shiny App that allows the user to select an alcohol type (vodka, whiskey, tequila, rum, gin) and the drinks which use that alcohol type. After the user selects and alcohol type and associated drink, a table with the ingredients and an image of the drink appears on the screen.
 
 **Libraries used:** tidyverse, shiny
 
 **Final output:**
 
-**What I learned:** 
+<img src='2020-05-26/tidy_tuesday_drinks_markdown.png' width=70%>
+
+**What I learned:** This served as a nice re-introduction to R Shiny Apps for me. I had worked with these ~2 years ago and have not done much with them since. 
