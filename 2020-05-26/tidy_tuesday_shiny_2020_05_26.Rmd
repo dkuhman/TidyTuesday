@@ -9,19 +9,81 @@ runtime: shiny
 ```{r, include=FALSE}
 library(tidyverse)
 library(shiny)
+
+# Get the Data
+cocktails <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-26/cocktails.csv')
+
+#Select columns and filter to include nly alcoholic drinks
+cocktails <- cocktails %>% 
+  select(drink, alcoholic, category, glass, ingredient_number, 
+         ingredient, measure, drink_thumb) %>% 
+  filter(alcoholic == 'Alcoholic')
+
+#Add alcohol type
+cocktails$type<-NA
+cocktails$type[grep('vodka', tolower(cocktails$ingredient))] <- 'Vodka'
+cocktails$type[grep('whiskey', tolower(cocktails$ingredient))] <- 'Whiskey'
+cocktails$type[grep('tequila', tolower(cocktails$ingredient))] <- 'Tequila'
+cocktails$type[grep('rum', tolower(cocktails$ingredient))] <- 'Rum'
+cocktails$type[grep('gin', tolower(cocktails$ingredient))] <- 'Gin'
+
+cocktails <- cocktails %>% 
+  rename(
+    Number = ingredient_number,
+    Ingredient = ingredient,
+    Measure = measure
+  )
 ```
 
 Throwing a party and looking for a lineup of drinks? Look no further - this is your ultimate guide for making cocktails! 
 
-## Choose your Alcohol
+***
+## Choose your Alcohol!
 
-```{r, echo=FALSE, warning=FALSE}
+```{r select-input, echo=FALSE, warning=FALSE}
+#Create panel for alcohol type
 inputPanel(
-  selectInput("n_breaks", label = "Alcohol:",
+  selectInput("alcohol_type", label = "Alcohol:",
               choices = c('Vodka', 'Whiskey', 'Tequila', 'Rum', 'Gin'),
               selected = 'Vodka')
 )
 ```
 
+***
+## Choose your Drink!
 
+```{r echo=FALSE, warning=FALSE}
+#Create panel for alcohol type
+renderUI({inputPanel(selectInput("drink_type", label = "Drink:",
+                      choices = unique(cocktails$drink[cocktails$type==input$alcohol_type]),
+                      selected = '155 Belmont')
+)})
+```
 
+***
+## Ingredients!
+
+```{r echo=FALSE, warning=FALSE}
+renderDataTable({
+   cocktails%>%filter(drink == input$drink_type) %>% 
+    select(Number, Ingredient, Measure)
+})
+```
+
+## Enjoy!
+
+```{r, out.width = "600px", echo=FALSE, warning=FALSE, fig.align='center'}
+renderUI({imgurl <- cocktails %>%
+  filter(drink == input$drink_type) %>% 
+  select(drink_thumb)
+    
+    imgurl <- as.character(head(imgurl,1))
+
+    div(id = "myImage",
+      tags$img(src = imgurl, width = 400))
+  })
+```
+
+***
+### See the full code here:
+https://github.com/dkuhman/TidyTuesday/tree/master/2020-05-26
